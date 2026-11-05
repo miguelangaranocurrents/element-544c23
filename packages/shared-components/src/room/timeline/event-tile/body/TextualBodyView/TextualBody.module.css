@@ -41,6 +41,12 @@
     display: flex;
 }
 
+/* Let the body shrink to the tile width instead of growing to the widest unbreakable line
+   (e.g. a wide code block), which would push the rest of the message out of view. */
+.annotated > * {
+    min-width: 0;
+}
+
 .annotatedInline {
     display: inline-flex;
 }
