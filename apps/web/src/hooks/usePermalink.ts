@@ -144,7 +144,8 @@ export const usePermalink: (args: Args) => HookResult = ({
     if (type === PillType.AtRoomMention && permalinkRoom) {
         text = "@room";
     } else if (type === PillType.UserMention && resourceId) {
-        text = member?.name || resourceId;
+        const userId = resourceId;
+        text = member?.name || userId;
         onClick = (e: ButtonEvent): void => {
             e.preventDefault();
             e.stopPropagation();
@@ -152,7 +153,7 @@ export const usePermalink: (args: Args) => HookResult = ({
             // profile can still be shown from the user id, as Linkify does for user links.
             dis.dispatch<ViewUserPayload>({
                 action: Action.ViewUser,
-                member: member ?? new User(resourceId),
+                member: member ?? new User(userId),
             });
         };
     } else if (type === PillType.RoomMention) {
